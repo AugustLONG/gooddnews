@@ -36,7 +36,7 @@ CELERYBEAT_SCHEDULE = {
 SECRET_KEY = 'zztwt1danz6frz*#5x65^&k+e*^)calp)ru_b^sane#$qoy-1d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 #ALLOWED_HOSTS = [".herokuapp.com"]
 #ALLOWED_HOSTS = ['*']
@@ -95,29 +95,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'hn_clone.wsgi.application'
 
 
-#Database
-# DATABASES = {
-#     # dj_database_url expects an env var called DATABASE_URL.
-#     #   export DATABASE_URL='postgres://<user>:<passwd>@<host>:<port>/<dbname>'
-#     'default': dj_database_url.config(),
-# }
-
-
-
-
+# Database
 DATABASES = {
-      'default': {
-          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-          'NAME': 'testdb',
-          'USER': 'test',
-          'PASSWORD': '123456',
-          'HOST': 'localhost', # '127.0.0.1' probably works also
-          'PORT': '5432',
-      }
-  }
-#DATABASES['default'] = dj_database_url.config()
-
-#DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+    # dj_database_url expects an env var called DATABASE_URL.
+    #   export DATABASE_URL='postgres://<user>:<passwd>@<host>:<port>/<dbname>'
+    'default': dj_database_url.config(),
+}
+DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
 LANGUAGE_CODE = 'en-us'
 
