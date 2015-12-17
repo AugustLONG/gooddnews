@@ -11,13 +11,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 import os
-import dj_database_url
+# import dj_database_url
 from unipath import Path
 from datetime import timedelta
 
 
 BASE_DIR = Path(__file__).parent
 
+TIME_ZONE = 'Asia/Shanghai'
 
 # Celery settings
 BROKER_URL = 'django://'
@@ -25,6 +26,7 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+CELERY_TIMEZONE = TIME_ZONE
 
 CELERYBEAT_SCHEDULE = {
     'update_events': {
@@ -38,14 +40,7 @@ SECRET_KEY = 'zztwt1danz6frz*#5x65^&k+e*^)calp)ru_b^sane#$qoy-1d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = [".herokuapp.com"]
-#ALLOWED_HOSTS = ['*']
-#ALLOWED_HOSTS = [
-#    'localhost', '.my_site.com', # not 'my_site.com']
-ALLOWED_HOSTS = [
-    '.example.com', # Allow domain and subdomains
-    '.example.com.', # Also allow FQDN and subdomains
-]
+# ALLOWED_HOSTS = [".herokuapp.com"]
 
 
 # Application definition
@@ -53,7 +48,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
+    # 'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
@@ -61,6 +56,7 @@ INSTALLED_APPS = (
     'djcelery',
     'bootstrap3',
     'webapp',
+    # 'hackernews'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -95,33 +91,26 @@ TEMPLATES = [
 WSGI_APPLICATION = 'hn_clone.wsgi.application'
 
 
-#Database
+# # Database
 # DATABASES = {
 #     # dj_database_url expects an env var called DATABASE_URL.
 #     #   export DATABASE_URL='postgres://<user>:<passwd>@<host>:<port>/<dbname>'
 #     'default': dj_database_url.config(),
 # }
-
-
-
+# DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
 DATABASES = {
-      'default': {
-          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-          'NAME': 'testdb',
-          'USER': 'test',
-          'PASSWORD': '123456',
-          'HOST': 'localhost', # '127.0.0.1' probably works also
-          'PORT': '5432',
-      }
-  }
-#DATABASES['default'] = dj_database_url.config()
-
-#DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+
+
 
 USE_I18N = True
 
@@ -137,3 +126,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+
+# os.environ['SCRAPY_SETTINGS_MODULE'] = 'crawler.hackernews.settings'

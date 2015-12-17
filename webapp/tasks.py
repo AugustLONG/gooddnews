@@ -7,5 +7,5 @@ from celery import task
 
 @task()
 def crawl():
-    os.environ['SCRAPY_SETTINGS_MODULE'] = 'crawler.hackernews.settings'
+    # os.environ['SCRAPY_SETTINGS_MODULE'] = 'crawler.hackernews.settings'
     return subprocess.call(['scrapy', 'crawl', 'hnews'])

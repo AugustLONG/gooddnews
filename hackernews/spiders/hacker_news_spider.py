@@ -2,7 +2,7 @@ import scrapy
 from urlparse import urljoin
 from webapp.models import HackerNewsItemSet
 from scrapy.linkextractors import LinkExtractor
-from crawler.hackernews.items import HackerNewsItem
+from hackernews.items import HackerNewsItem
 
 
 class HackerNewsSpider(scrapy.Spider):
